@@ -5,12 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/Fakery.svg?style=flat)](http://cocoadocs.org/docsets/Fakery)
 [![Platform](https://img.shields.io/cocoapods/p/Fakery.svg?style=flat)](http://cocoadocs.org/docsets/Fakery)
 
-This is a Swift port of Ruby's [Faker](https://github.com/stympy/faker) library that generates fake data.
+This is a Swift rework of Vadym Markov's [Fakery](https://github.com/vadymmarkov/Fakery) library that generates fake data.
 
-Are you still bothered with meaningless randomly character strings? Just relax and leave this job to **Fakery**.
-It's useful in all the cases when you need to use some dummy data for testing, population of database during development, etc.
-
-**NOTE**: Generated data is pretty realistic, supports a range of locales, but returned values are not guaranteed to be unique.
+This package is much faster than the original, since there's no loading from external files.
 
 ## Table of Contents
 
@@ -18,24 +15,15 @@ It's useful in all the cases when you need to use some dummy data for testing, p
 * [Localization](#localization)
 * [Generators](#generators)
   * [Address](#address)
-  * [App](#app)
   * [Business](#business)
-  * [Cat](#cat)
   * [Commerce](#commerce)
   * [Company](#company)
-  * [Zelda](#zelda)
   * [Gender](#gender)
   * [Internet](#internet)
   * [Lorem](#lorem)
   * [Name](#name)
   * [Number](#number)
   * [Phone number](#phone-number)
-  * [Team](#team)
-  * [Bank](#bank)
-  * [Car](#car)
-  * [Programming language](#programming-language)
-  * [Vehicle](#vehicle)
-  * [Hobbit](#hobbit)
 * [Installation](#installation)
 * [Contributing](#contributing)
 * [Author](#author)
@@ -44,7 +32,7 @@ It's useful in all the cases when you need to use some dummy data for testing, p
 ## Usage
 
 ```swift
-import Fakery
+import Phony
 
 let faker = Faker(locale: "nb-NO")
 
@@ -52,16 +40,6 @@ let firstName = faker.name.firstName()  //=> "Emilie"
 let lastName = faker.name.lastName()    //=> "Hansen"
 let city = faker.address.city()         //=> "Oslo"
 ```
-
-## Localization
-
-**Fakery** is quite powerful when it comes to generation of locale-specific data.
-In `Resources/Locales` you can find JSON files for more than 20 locales, and, of course, it's not a limit.
-Feel free to contribute and add more!  
-
-The default locale is English. When you use one of the available generators and
-the corresponding key is not found in a JSON file for the currently selected
-locale **Fakery** will also check if it exists in "en.json" file.
 
 ## Generators
 
@@ -89,15 +67,6 @@ faker.address.longitude() //=> -156.65548382095133
 faker.address.coordinate() //=> CLLocationCoordinate2D(latitude: 40.97868, longitude: 29.09306)
 ```
 
-### App
-
-```swift
-
-faker.app.name() //=> "Namfix"
-faker.app.version() //=> "0.1.1"
-faker.app.author() //=> "Ida Adams"
-```
-
 ### Business
 
 ```swift
@@ -105,15 +74,6 @@ faker.app.author() //=> "Ida Adams"
 faker.business.creditCardNumber() //=> "1234-2121-1221-1211"
 faker.business.creditCardType() //=> "visa"
 faker.business.creditCardExpiryDate() //=> "2020-10-12"
-```
-
-### Cat
-
-```swift
-
-faker.cat.name() //=> "Shadow"        
-faker.cat.breed() //=> "British Semipi-longhair"
-faker.cat.registry() //=> "American Cat Fanciers Association"
 ```
 
 ### Commerce
@@ -135,13 +95,6 @@ faker.company.suffix() //=> "Inc"
 faker.company.catchPhrase() //=> "Universal software"        
 faker.company.bs() //=> "implement innovative methodologies"
 faker.company.logo() // "http://pigment.github.io/fake-logos/logos/medium/color/1.png"
-```
-
-### Zelda
-
-```swift
-
-faker.zelda.game() //=> "Ocarina of Time"   
 ```
 
 ### Gender
@@ -227,77 +180,10 @@ faker.phoneNumber.subscriberNumber() //=> "1234"
 faker.phoneNumber.numberExtension(length: Int) // "123"
 ```
 
-### Team
-
-```swift
-
-faker.team.name() //=> "bats"         
-faker.team.creature() //=> "Alabama bats"
-faker.team.state() // => "Alabama"
-```
-
-### Bank
-
-```swift
-faker.bank.name() //=> "ABN AMRO CORPORATE FINANCE LIMITED"         
-faker.bank.swiftBic() //=> "AAFMGB21"
-faker.bank.iban() // => "NL45BUNQ2209931378"
-faker.bank.bban() //=> ABNA0136468471
-```
-
-### Hobbit
-
-```swift
-faker.hobbit.character() //=> "Bilbo Baggins"         
-faker.hobbit.thorinsCompany() //=> "Thorin Oakenshield"
-faker.hobbit.quote() // => "Do you wish me a good morning, or mean that it is a good morning whether I want it or not; or that you feel good this morning; or that it is a morning to be good on?"
-faker.hobbit.location() //=> "Bree"
-```
-
-### Car
-
-```swift
-faker.car.brand() //=> "BMW"
-```
-
-### Programming language
-
-```swift
-faker.programming_language.name() //=> "Elixir"         
-faker.programming_language.creator() //=> "José Valim"         
-```
-
-### Vehicle
-
-```swift
-faker.vehicle.manufacture() //=> "Volkswagen" 
-faker.vehicle.make() //=> "BMW"
-faker.vehicle.colors() //=> "Red"
-```
-
-### Ham
-
-```swift
-faker.ham.name() //=> "Taylor Ham"         
-```
-
-### House
-
-```swift
-faker.house.furniture() //=> "chair"
-faker.house.room() //=> "living room" 
-```
 
 ## Installation
 
-**Fakery** is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'Fakery'
-```
-
-Or alternatively using the Swift Package Manager:
+**Phony**  is available using the Swift Package Manager:
 
 ```swift
 let package = Package(
@@ -313,14 +199,11 @@ let package = Package(
 
 Use of the Swift Package Manager requires Swift >=5.3.
 
-## Contributing
+## Authors
 
-Please see our [playbook](https://github.com/hyperoslo/playbook/blob/master/GIT_AND_GITHUB.md) for guidelines on contributing.
-
-## Author
-
-Vadym Markov, markov.vadym@gmail.com
+Vadym Markov, markov.vadym@gmail.com 
+Jacob Graves, freakazoidjake@gmail.com
 
 ## License
 
-**Fakery** is available under the MIT license. See the LICENSE file for more info.
+**Phony** is available under the MIT license. See the LICENSE file for more info.

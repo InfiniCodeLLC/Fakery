@@ -1,12 +1,12 @@
 //
 //  LinuxMain.swift
-//  
+//
 //
 //  Created by Gustavo Campos on 3/16/19.
 //
 
-import XCTest
 import Quick
+import XCTest
 
 @testable import FakeryTests
 
